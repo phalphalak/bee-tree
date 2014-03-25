@@ -2,9 +2,20 @@
   (:gen-class)
   (:require [clojure.tools.namespace.repl :refer (refresh)]
             [bee-tree.components.nrepl :as nrepl]
-            [bee-tree.components.jetty :as jetty]))
+            [bee-tree.components.jetty :as jetty]
+            [bee-tree.routes :as routes]
+            [bee-tree.middleware.view :refer [wrap-view]]
+            [compojure.handler :as handler]
+            [ring.middleware
+             [reload :refer [wrap-reload]]
+             [stacktrace :refer [wrap-stacktrace]]]))
 
-(defn app [x] (prn x))
+(def app
+  (-> #'routes/main-routes
+      (wrap-view)
+      (handler/api)
+      (wrap-reload {:dirs ["src-clj"]})
+      (wrap-stacktrace)))
 
 (defn init []
   (nrepl/init)
