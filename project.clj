@@ -9,7 +9,9 @@
                  [org.clojure/tools.nrepl "0.2.3"]
                  [com.stuartsierra/component "0.2.1"]
                  [org.clojure/tools.namespace "0.2.4"]
-                 [ring "1.2.2"]]
+                 [ring "1.2.2"]
+                 [compojure "1.1.6"]
+                 [enlive "1.1.5"]]
   :main bee-tree.core
 ;  :ring {:handler bee-tree.routes/app}
   )
