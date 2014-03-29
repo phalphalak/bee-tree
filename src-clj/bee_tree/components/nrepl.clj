@@ -5,8 +5,9 @@
 (defrecord NRepl [port]
   component/Lifecycle
   (start [this]
-    (println "start nrepl")
-    (assoc this :server (nrepl/start-server :port (get this :port))))
+    (let [port (get this :port)]
+      (println (format "start nrepl on port %s" port))
+      (assoc this :server (nrepl/start-server :port port))))
   (stop [this]
     (println "stop nrepl")
     (nrepl/stop-server (get this :server))

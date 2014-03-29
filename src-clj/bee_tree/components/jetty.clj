@@ -9,8 +9,10 @@
       (do (println "restart jetty")
           (.start server)
           this)
-      (do (println "start jetty")
-          (assoc this :server (jetty/run-jetty handler {:port (get this :port) :join? false})))))
+      (let [port (get this :port)]
+        (println (format "start jetty on port %s" port))
+        (assoc this :server (jetty/run-jetty handler {:port port
+                                                      :join? false})))))
   (stop [this]
     (println "stop jetty")
     (.stop (get this :server))

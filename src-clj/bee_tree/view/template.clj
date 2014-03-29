@@ -1,5 +1,6 @@
 (ns bee-tree.view.template
   (:require [bee-tree.view.snippet :as snippet]
+            [bee-tree.view.util :as util]
             ;[net.cgrand.reload :as reload]
             [net.cgrand.enlive-html :refer [deftemplate
                                             defsnippet
@@ -25,7 +26,7 @@
 
 (deftemplate layout "templates/layout.html"
   [{:keys [title content] :as args}]
-  [:title] (html/content title)
+  [:title] (util/when-content title)
   (inside-marker "header") (replace-vars (select-keys args [:headline]))
   (marker "content") (html/content content))
 
