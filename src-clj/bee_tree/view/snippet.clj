@@ -4,5 +4,9 @@
 (defn snippet [name]
   [(html/attr-has :data-snippet name)])
 
+(html/defsnippet detail "snippets/detail.html"
+  (snippet "detail")
+  [])
+
 (defn index-content [ctx]
-  "content goes here")
+  (detail))
